@@ -5,10 +5,11 @@
 //  Created by user on 2017/10/18.
 //  Copyright © 2017年 Jann_Lee. All rights reserved.
 //
-
 #import "FarmViewController.h"
 #import "FarmView.h"
 #import "FarmViewModel.h"
+#import "FriendsCircleViewController.h"
+#import "PlantingViewController.h"
 
 @interface FarmViewController ()
 @property(nonatomic,strong) FarmViewModel *viewModel;
@@ -36,6 +37,33 @@
     [self.mainView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
+}
+
+-(void)bindViewModel {
+    [[self.viewModel.farmHeadItemClickSubject takeUntil:self.rac_willDeallocSignal]  subscribeNext:^(NSString * _Nullable x) {
+        NSLog(@"%@",x);
+        switch ([x intValue]) {
+            case 0:
+                [self pushPlanting];
+                break;
+                
+            case 1:{
+                [self pushFriendsCircle];
+            }
+            default:
+                break;
+        }
+    }];
+}
+
+-(void)pushPlanting{
+    PlantingViewController *friends = [[PlantingViewController alloc] init];
+    [self.navigationController pushViewController:friends animated:YES];
+}
+
+-(void)pushFriendsCircle {
+    FriendsCircleViewController *friendCircle = [[FriendsCircleViewController alloc] init];
+    [self.navigationController pushViewController:friendCircle animated:YES];
 }
 /*
 #pragma mark - Navigation

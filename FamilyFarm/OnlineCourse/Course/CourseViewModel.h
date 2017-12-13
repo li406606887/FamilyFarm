@@ -9,5 +9,5 @@
 #import "BaseViewModel.h"
 
 @interface CourseViewModel : BaseViewModel
-
+@property(nonatomic,strong) RACSubject *courseCellClickSubject;
 @end

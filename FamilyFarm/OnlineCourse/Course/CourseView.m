@@ -11,7 +11,9 @@
 #import "CourseTableViewCell.h"
 #import "SeachView.h"
 
-@interface CourseView ()<UITableViewDelegate,UITableViewDataSource,UISearchResultsUpdating,UISearchBarDelegate>
+
+
+@interface CourseView ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong) SeachView *searchBar;
 @property(nonatomic,strong) CourseViewModel *viewModel;
 @property(nonatomic,strong) UITextField *textfield;
@@ -52,7 +54,9 @@
     return cell;
 }
 
-
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self.viewModel.courseCellClickSubject sendNext:[NSString stringWithFormat:@"%ld",indexPath.row]];
+}
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
@@ -91,4 +95,7 @@
     }
     return _textfield;
 }
+
+
+
 @end

@@ -20,8 +20,8 @@
 @property (nonatomic, strong) UIButton * commitBtn;
 @property (nonatomic, strong) UIView  * backImageView;
 
-@property(nonatomic,copy) void (^goonBlock)();
-@property(nonatomic,copy) void (^closeBlock)();
+@property(nonatomic,copy) void (^goonBlock)(void);
+@property(nonatomic,copy) void (^closeBlock)(void);
 @property (nonatomic,copy) void (^commitBlock)(NSString * passWord);
 -(id)initWithLiveTitle:(NSString *)title SubTitle:(NSString *)subTitile;//直播弹框
 -(id)initWithTitle:(NSString *)title SubTitle:(NSString *)subTitle

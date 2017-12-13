@@ -9,5 +9,10 @@
 #import "CourseViewModel.h"
 
 @implementation CourseViewModel
-
+-(RACSubject *)courseCellClickSubject {
+    if (!_courseCellClickSubject) {
+        _courseCellClickSubject = [RACSubject subject];
+    }
+    return _courseCellClickSubject;
+}
 @end

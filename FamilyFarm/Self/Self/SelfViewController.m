@@ -9,6 +9,12 @@
 #import "SelfViewController.h"
 #import "SelfView.h"
 #import "SelfViewModel.h"
+#import "ModifyInfoViewController.h"
+#import "AddressViewController.h"
+#import "OrderViewController.h"
+#import "IntegralStoreViewController.h"
+#import "MineGroupViewController.h"
+
 
 @interface SelfViewController ()
 @property(nonatomic,strong) SelfView *mainView;
@@ -35,6 +41,39 @@
     [super updateViewConstraints];
     [self.mainView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
+    }];
+}
+
+-(void)bindViewModel {
+    @weakify(self)
+    [[self.viewModel.modifyInfoClickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(id  _Nullable x) {
+        @strongify(self)
+        ModifyInfoViewController *modifyInfo = [[ModifyInfoViewController alloc] init];
+        [self.navigationController pushViewController:modifyInfo animated:YES];
+    }];
+    [[self.viewModel.selfItemClickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(id  _Nullable x) {
+        switch ([x intValue]) {
+            case 0:{
+                AddressViewController *address = [[AddressViewController alloc] init];
+                [self.navigationController pushViewController:address animated:YES];
+            }
+            case 1:{
+                OrderViewController *order = [[OrderViewController alloc] init];
+                [self.navigationController pushViewController:order animated:YES];
+            }
+            case 6:{
+                IntegralStoreViewController *integralStore = [[IntegralStoreViewController alloc] init];
+                [self.navigationController pushViewController:integralStore animated:YES];
+            }
+            case 7:{
+                MineGroupViewController *mineGroup = [[MineGroupViewController alloc] init];
+                [self.navigationController pushViewController:mineGroup animated:YES];
+            }
+                break;
+                
+            default:
+                break;
+        }
     }];
 }
 /*

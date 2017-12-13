@@ -101,13 +101,13 @@
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     ScrollCollectionViewCell *cell =[collectionView dequeueReusableCellWithReuseIdentifier:[NSString stringWithUTF8String:object_getClassName([ScrollCollectionViewCell class])] forIndexPath:indexPath];
-    FarmViewModel *model = self.imageArray[indexPath.row];
+//    FarmViewModel *model = self.imageArray[indexPath.row];
 //    cell.image_url = [NSString stringWithFormat:@"%@%@",imageLink,model.imgUrl];
     return cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    FarmViewModel *model = self.modelArray[indexPath.row];
+//    FarmViewModel *model = self.modelArray[indexPath.row];
 //    [self.viewModel.scrollClickSubject sendNext:model];
 }
 

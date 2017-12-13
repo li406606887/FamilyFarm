@@ -9,5 +9,5 @@
 #import "BaseViewModel.h"
 
 @interface FarmViewModel : BaseViewModel
-
+@property(nonatomic,strong) RACSubject *farmHeadItemClickSubject;
 @end

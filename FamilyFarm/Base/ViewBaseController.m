@@ -35,7 +35,7 @@
     self.navigationItem.rightBarButtonItem = [self rightButton];//设置导航栏右边按钮
     self.navigationItem.titleView = [self centerView];//设置titel
     self.edgesForExtendedLayout = UIRectEdgeNone;
-    self.automaticallyAdjustsScrollViewInsets = NO;
+//    self.automaticallyAdjustsScrollViewInsets = NO;
     
 }
 

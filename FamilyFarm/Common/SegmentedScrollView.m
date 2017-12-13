@@ -84,7 +84,7 @@
         [self.btnArray addObject:button];
         [self.scroll addSubview:button];
         button.selected = i == 0 ? YES : NO;
-        [button setFrame:CGRectMake(self.spacing*i, 0, self.spacing, 30)];
+        [button setFrame:CGRectMake(self.spacing*i, 0, self.spacing, self.frame.size.height-3)];
         i++;
     }
     
@@ -93,7 +93,7 @@
 
 -(UIView *)line {
     if (!_line) {
-        _line = [[UIView alloc] initWithFrame:CGRectMake(15, 30, self.spacing-30, 2)];
+        _line = [[UIView alloc] initWithFrame:CGRectMake(15, self.frame.size.height-3, self.spacing-30, 2)];
         _line.backgroundColor = self.lineColor;
     }
     return _line;
@@ -101,7 +101,7 @@
 
 -(UIScrollView *)scroll {
     if (!_scroll) {
-        _scroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 30)];
+        _scroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
         _scroll.delegate = self;
         int count = (int)self.itemArray.count;
         if (count*self.spacing > SCREEN_WIDTH) {

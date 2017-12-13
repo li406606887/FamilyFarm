@@ -9,6 +9,8 @@
 #import "StoreViewController.h"
 #import "StoreView.h"
 #import "StoreViewModel.h"
+#import "ShoppingCartViewController.h"
+
 
 @interface StoreViewController ()
 @property(nonatomic,strong) StoreView * mainView;
@@ -38,7 +40,16 @@
     }];
 }
 
-
+-(UIBarButtonItem *)rightButton {
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setBackgroundColor:[UIColor redColor]];
+    [[button rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable x) {
+        ShoppingCartViewController *shopingCart = [[ShoppingCartViewController alloc] init];
+        [self.navigationController pushViewController:shopingCart animated:YES];
+    }];
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:button];
+    return item;
+}
 /*
 #pragma mark - Navigation
 

@@ -15,6 +15,7 @@
 @property(nonatomic,strong) UICollectionView *collectionView;
 @property(nonatomic,strong) SelfHeadView *headView;
 @property(nonatomic,strong) SelfViewModel *viewModel;
+@property(nonatomic,strong) NSArray *titleArray;
 @end
 
 @implementation SelfView
@@ -43,16 +44,18 @@
 }
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
-    return CGSizeMake(SCREEN_WIDTH, 80);
+    return CGSizeMake(SCREEN_WIDTH, 150);
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     SelfCollectionViewCell *cell =[collectionView dequeueReusableCellWithReuseIdentifier:[NSString stringWithUTF8String:object_getClassName([SelfCollectionViewCell class])] forIndexPath:indexPath];
     cell.backgroundColor = [UIColor magentaColor];
+    cell.title.text = self.titleArray[indexPath.row];
     return cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    [self.viewModel.selfItemClickSubject sendNext:[NSString stringWithFormat:@"%ld",indexPath.row]];
 }
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -108,5 +111,11 @@
         _headView = [[SelfHeadView alloc] initWithViewModel:self.viewModel];
     }
     return _headView;
+}
+-(NSArray *)titleArray {
+    if (!_titleArray) {
+        _titleArray = [NSArray arrayWithObjects:@"收货地址",@"我的订单",@"荣誉榜单",@"农场小游戏",@"我的课程",@"分享App",@"积分兑换",@"我的圈子",@"在线客服",nil];
+    }
+    return _titleArray;
 }
 @end

@@ -10,4 +10,10 @@
 
 @implementation FarmViewModel
 
+-(RACSubject *)farmHeadItemClickSubject {
+    if (!_farmHeadItemClickSubject) {
+        _farmHeadItemClickSubject = [RACSubject subject];
+    }
+    return _farmHeadItemClickSubject;
+}
 @end

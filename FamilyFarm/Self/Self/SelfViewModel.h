@@ -9,5 +9,6 @@
 #import "BaseViewModel.h"
 
 @interface SelfViewModel : BaseViewModel
-
+@property(nonatomic,strong) RACSubject *modifyInfoClickSubject;
+@property(nonatomic,strong) RACSubject *selfItemClickSubject;
 @end

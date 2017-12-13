@@ -46,10 +46,10 @@
         [item setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [item setImage:[UIImage imageNamed:@"ss"] forState:UIControlStateNormal];
         @weakify(self)
-        [[[item rac_signalForControlEvents:UIControlEventTouchUpInside]
-         takeUntil:self.rac_willDeallocSignal] subscribeNext:^(__kindof UIControl * _Nullable x) {
-            NSLog(@"%ld",x.tag);
-                     
+        [[item rac_signalForControlEvents:UIControlEventTouchUpInside]
+           subscribeNext:^(__kindof UIControl * _Nullable x) {
+           @strongify(self)
+            [self.viewModel.farmHeadItemClickSubject sendNext:[NSString stringWithFormat:@"%ld",x.tag]];
         }];
         [item setTag:i];
         [self addSubview:item];

@@ -11,7 +11,7 @@
 @interface StoreTableViewCell ()
 @property(nonatomic,strong) UIImageView *imageDetails;
 @property(nonatomic,strong) UILabel *price;
-@property(nonatomic,strong) UILabel *title;
+@property(nonatomic,strong) UIButton *buy;
 @end
 
 @implementation StoreTableViewCell
@@ -21,7 +21,7 @@
     if (self) {
         [self addSubview:self.imageDetails];
         [self addSubview:self.price];
-        [self addSubview:self.title];
+        [self addSubview:self.buy];
         
         [self setNeedsUpdateConstraints];
         [self updateConstraintsIfNeeded];
@@ -32,19 +32,19 @@
 -(void)updateConstraints {
     [super updateConstraints];
     [self.imageDetails mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.top.equalTo(self);
+        make.centerX.top.equalTo(self.contentView);
         make.size.mas_offset(CGSizeMake(SCREEN_WIDTH*0.5-10, SCREEN_WIDTH*0.5-10));
     }];
     
     [self.price mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self).with.offset(10);
+        make.left.equalTo(self.contentView).with.offset(10);
         make.top.equalTo(self.imageDetails.mas_bottom).with.offset(10);
         make.size.mas_offset(CGSizeMake(SCREEN_WIDTH*0.5-15, 20));
     }];
     
-    [self.title mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self).with.offset(10);
-        make.top.equalTo(self.price.mas_bottom).with.offset(6);
+    [self.buy mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.contentView.mas_right).with.offset(-10);
+        make.top.equalTo(self.imageDetails.mas_bottom).with.offset(6);
         make.size.mas_offset(CGSizeMake(SCREEN_WIDTH*0.5-35, 20));
     }];
 }
@@ -66,12 +66,13 @@
     return _price;
 }
 
--(UILabel *)title {
-    if (!_title) {
-        _title = [[UILabel alloc] init];
-        _title.font = [UIFont systemFontOfSize:14];
-        _title.text = @"hhhh";
+-(UIButton *)buy {
+    if (!_buy) {
+        _buy = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_buy setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [_buy.titleLabel setFont:[UIFont systemFontOfSize:14]];
+        [_buy setBackgroundColor:[UIColor redColor]];
     }
-    return _title;
+    return _buy;
 }
 @end

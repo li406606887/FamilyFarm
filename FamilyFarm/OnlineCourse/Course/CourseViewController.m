@@ -7,6 +7,7 @@
 //
 
 #import "CourseViewController.h"
+#import "CourseDetailsViewController.h"
 #import "CourseViewModel.h"
 #import "CourseView.h"
 
@@ -34,6 +35,15 @@
     [super updateViewConstraints];
     [self.mainView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
+    }];
+}
+
+-(void)bindViewModel {
+    @weakify(self)
+    [[self.viewModel.courseCellClickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(id  _Nullable x) {
+        @strongify(self)
+        CourseDetailsViewController *courseDetails = [[CourseDetailsViewController alloc] init];
+        [self.navigationController pushViewController:courseDetails animated:YES];
     }];
 }
 /*

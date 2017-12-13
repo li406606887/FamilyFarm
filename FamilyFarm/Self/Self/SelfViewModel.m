@@ -9,5 +9,16 @@
 #import "SelfViewModel.h"
 
 @implementation SelfViewModel
-
+-(RACSubject *)modifyInfoClickSubject {
+    if (!_modifyInfoClickSubject) {
+        _modifyInfoClickSubject = [RACSubject subject];
+    }
+    return _modifyInfoClickSubject;
+}
+-(RACSubject *)selfItemClickSubject {
+    if (!_selfItemClickSubject) {
+        _selfItemClickSubject = [RACSubject subject];
+    }
+    return _selfItemClickSubject;
+}
 @end
